@@ -15,3 +15,17 @@ Keep the responsibilities separated as best you can:
 4. Displaying information to the user
 5. Rather user input and taking the appropriate actions
 */
+
+let fs = require('fs');
+let process = require('process')
+let file = process.argv[2]
+
+function printList(file) {
+  let text = fs.readFileSync(file, 'utf-8').split("\n")
+  for (let i = 1; i < text.length - 1; i++ ) {
+    console.log(`${i}. ${text[i]}`)
+  }
+
+}
+
+printList(file)
