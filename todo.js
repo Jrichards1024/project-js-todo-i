@@ -19,23 +19,30 @@ Keep the responsibilities separated as best you can:
 let fs = require('fs');
 let process = require('process')
 //let file = process.argv[2]
-let addVerdict = process.argv[2]
-let addedElement = process.argv[3]
+let addDeleteVerdict = process.argv[2]
+let addedDeletedElement = process.argv[3]
+
 
 function printList(file) {
   let text = fs.readFileSync(file, 'utf-8').split("\n")
   text.splice(text.length - 1,1)
-  addToList(text)
+  addOrDeleteFromList(text)
   for (let i = 0; i < text.length; i++ ) {
     console.log(`${i + 1}. ${text[i]}`)
   }
-function addToList(text) {
-  if (addVerdict === "add") {
-  text.push(addedElement)
+}
+function addOrDeleteFromList(text) {
+  if (addDeleteVerdict === "add") {
+  text.push(addedDeletedElement)
+  }
+  else if (addDeleteVerdict === "delete") {
+    text = text.splice(addedDeletedElement - 1, 1)
+    return text
   }
 }
 
-}
+
+
 
 //printList(file)
 printList('./todos.txt')
